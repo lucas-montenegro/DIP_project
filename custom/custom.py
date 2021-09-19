@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import csv
 import datetime
 import numpy as np
 import skimage.draw
@@ -27,6 +28,15 @@ COCO_WEIGHTS_PATH = '/content/DIP_project/mask_rcnn_coco.h5'
 # through the command line argument --logs
 DEFAULT_LOGS_DIR = '/content/DIP_project/logs'
 
+
+# Reading the classes that are in a csv file
+
+with open("/content/classes.csv") as file_name:
+    file_read = csv.reader(file_name)
+    classes = list(file_read)
+
+classes = classes[0]
+
 class CustomConfig(Config):
     """Configuration for training on the custom  dataset.
     Derives from the base Config class and overrides some values.
@@ -36,13 +46,13 @@ class CustomConfig(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 2  # Background + dog and cat
+    NUM_CLASSES = 1 +  len(classes) # Background + number of classes
 
     # Number of training steps per epoch
-    STEPS_PER_EPOCH = 50
+    STEPS_PER_EPOCH = 90
 
     # Skip detections with < 90% confidence
     DETECTION_MIN_CONFIDENCE = 0.9
@@ -59,9 +69,9 @@ class CustomDataset(utils.Dataset):
         subset: Subset to load: train or val
         """
         # Add classes. We have only one class to add.
-        self.add_class("object", 1, "dog")
-        self.add_class("object", 2, "cat")
-
+        for index in range(len(classes)): 
+          self.add_class("object", index + 1, classes[index])
+        
         # Train or validation dataset?
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
@@ -84,8 +94,10 @@ class CustomDataset(utils.Dataset):
             polygons = [r['shape_attributes'] for r in a['regions']] 
             objects = [s['region_attributes']['name'] for s in a['regions']]
             print("objects:",objects)
-            name_dict = {"dog": 1,"cat": 2}
-
+            name_dict = {}
+            for index in range(len(classes)): 
+              name_dict[classes[index]] = index + 1
+          
             # key = tuple(name_dict)
             num_ids = [name_dict[a] for a in objects]
 
