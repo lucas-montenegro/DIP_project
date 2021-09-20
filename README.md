@@ -1,3 +1,17 @@
+#DIP Project - Custom Mask RCNN
+##Created a colab to facilitate the creation of your own custom dataset and to train, validate and test your dataset
+
+> Github used as a reference to create this colab: <https://github.com/soumyaiitkgp/Custom_MaskRCNN>
+
+> Original Github work: <https://github.com/matterport/Mask_RCNN>
+
+> Original Work: <https://arxiv.org/abs/1703.06870>
+
+> Google Colab file: <https://colab.research.google.com/drive/1EvxOx2TLoKVOils2pl4qI3ESaFIw83fc?usp=sharing>
+
+> Project Presentation: <https://drive.google.com/file/d/1X3ECtTeEjRi0_-0f-ZpetlQZ_QkBmylm/view?usp=sharing>
+
+
 # MaskRCNN custom dataset module
 
 This is a repository based on Matterport Maskrcnn repository for the application of custom MaskRCNN to custom datasets/application like weed detection, day to day object detection etc. Find the module in the folder ['samples/custom'](https://github.com/soumyaiitkgp/Custom_MaskRCNN/tree/master/samples/custom).
