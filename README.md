@@ -1,5 +1,5 @@
-#DIP Project - Custom Mask RCNN
-##Created a colab to facilitate the creation of your own custom dataset and to train, validate and test your dataset
+# DIP Project - Custom Mask RCNN
+## Created a colab to facilitate the creation of your own custom dataset and to train, validate and test your dataset
 
 > Github used as a reference to create this colab: <https://github.com/soumyaiitkgp/Custom_MaskRCNN>
 
